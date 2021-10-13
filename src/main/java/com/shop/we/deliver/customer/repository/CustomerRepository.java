@@ -1,4 +1,4 @@
-package com.shop.we.deliver.customer;
+package com.shop.we.deliver.customer.repository;
 
 import java.util.List;
 import java.util.Optional;
@@ -9,6 +9,9 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
+
+import com.shop.we.deliver.customer.entity.Address;
+import com.shop.we.deliver.customer.entity.Customer;
 
 @Repository
 public interface CustomerRepository extends JpaRepository<Customer, Long> {
@@ -27,13 +30,16 @@ public interface CustomerRepository extends JpaRepository<Customer, Long> {
 	*/
 
 	@Query("SELECT b FROM Customer b WHERE b.regNo = ?1")
-	public abstract Optional<Customer> findCustomerByRegNo(String regNo);
+	public abstract Optional <Customer> findCustomerByRegNo(String regNo);
 	
 	@Query("SELECT c FROM Customer c WHERE c.username = ?1")
 	public abstract Optional<Customer> findCustomerByUsername(String username);
 	
 	@Query("SELECT c FROM Customer c WHERE c.email = ?1")
 	public abstract Optional <Customer> findCustomerByEmail(String email);
+	
+	@Query("SELECT s FROM Customer s ORDER BY s.regNo DESC")
+	public abstract List<Customer> findCustomerByDomain(String domain);
 	
 	//@Query(nativeQuery = true, value = "SELECT * FROM Customer  WHERE Customer.regNo = :regNo    DESC LIMIT 20")
 	@Query("SELECT s FROM Customer s ORDER BY s.regNo DESC")

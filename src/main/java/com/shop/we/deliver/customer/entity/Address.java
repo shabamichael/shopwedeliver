@@ -1,4 +1,4 @@
-package com.shop.we.deliver.customer;
+package com.shop.we.deliver.customer.entity;
 
 import java.io.Serializable;
 
@@ -16,6 +16,8 @@ import javax.persistence.SequenceGenerator;
 import org.hibernate.annotations.NotFound;
 import org.hibernate.annotations.NotFoundAction;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import lombok.Data;
 
 
@@ -32,6 +34,7 @@ public class Address  implements Serializable {
 	private String city;
 	private String state;
 	
+	@JsonBackReference
     @ManyToOne(fetch = FetchType.LAZY , cascade= CascadeType.ALL)
 	@JoinColumn(name = "fk_customer_id" , referencedColumnName = "id")
 	private Customer customer;
@@ -50,6 +53,19 @@ public class Address  implements Serializable {
 		this.town = town;
 		this.city = city;
 		this.state = state;
+	}
+	
+	
+	
+
+	public Address(String strNo, String street, String town, String city, String state, Customer customer) {
+		super();
+		this.strNo = strNo;
+		this.street = street;
+		this.town = town;
+		this.city = city;
+		this.state = state;
+		this.customer = customer;
 	}
 
 	public Long getId() {

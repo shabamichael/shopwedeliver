@@ -1,4 +1,4 @@
-package com.shop.we.deliver.customer;
+package com.shop.we.deliver.customer.entity;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -16,6 +16,8 @@ import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
+
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -83,7 +85,13 @@ import lombok.Setter;
 		@Column(name = "domain", nullable = false, columnDefinition = "TEXT" )
 		private  String domain;
 			
-	  @OneToMany(mappedBy = "customer",  fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = false)
+		@JsonManagedReference
+		@OneToMany(
+			  mappedBy = "customer",  
+			  fetch = FetchType.LAZY, 
+			  cascade = CascadeType.ALL, 
+			  orphanRemoval = true
+			  )
 		private List <Address> address = new ArrayList<Address>();
 
 
@@ -216,9 +224,4 @@ import lombok.Setter;
 		}
 
 
-
-	
-		  
-		  
-	
 }
