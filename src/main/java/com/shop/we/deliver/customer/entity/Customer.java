@@ -90,8 +90,7 @@ import lombok.Setter;
 			  mappedBy = "customer",  
 			  fetch = FetchType.LAZY, 
 			  cascade = CascadeType.ALL, 
-			  orphanRemoval = true
-			  )
+			  orphanRemoval = true)
 		private List <Address> address = new ArrayList<Address>();
 
 
@@ -222,6 +221,8 @@ import lombok.Setter;
 			this.username = username;
 			this.domain = domain;
 		}
+		
+		
 
 
 }

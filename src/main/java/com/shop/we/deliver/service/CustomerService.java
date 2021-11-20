@@ -3,6 +3,7 @@ package com.shop.we.deliver.service;
 import java.text.MessageFormat;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
 import java.util.Objects;
@@ -39,7 +40,8 @@ public class CustomerService {
 	private  CustomerRepository  customerRepository;
 	
 	@Autowired
-	private AddressRepository addRepo;
+	private  AddressRepository addressRepository;
+
 	
 	@Autowired
 	public CustomerService(CustomerRepository customerRepository) {
@@ -79,19 +81,15 @@ public class CustomerService {
 			message ="New customer %s is being added at  %s";
 			standardMessage = String.format(message, customer.getBusinessName(), LocalDateTime.now());
 		LOGGER.info(standardMessage);
+
 	
-		 // create first address
-		List<Address> addressList =  new ArrayList<Address>();
-		addressList.addAll(customer.getAddress());	
-		
 		customer = customerRepository.save(customer);
         return customer;
        					
 		}		
 	}		
 	 
-	
-			
+				
 	//Get List of all customers
 	public List<Customer>getAllCustomers(){
 		return customerRepository.findAll(); 
